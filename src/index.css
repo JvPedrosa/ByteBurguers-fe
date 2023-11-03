@@ -1,3 +1,21 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  padding: 20px;
+}
+
 main {
   display: flex;
   justify-content: space-between;
@@ -13,6 +31,11 @@ body {
   overflow-x: hidden;
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+h1,
+h2 {
+  margin: 0;
 }
 
 ::-webkit-scrollbar {

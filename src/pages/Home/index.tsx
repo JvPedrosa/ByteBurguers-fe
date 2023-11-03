@@ -1,7 +1,13 @@
+import { Products } from "../../components/Products";
+import storeItems from "../../data/items.json";
+import * as S from "./styles";
+
 export const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
+    <S.Row>
+      {storeItems.map((item) => (
+        <Products key={item.id} item={item} />
+      ))}
+    </S.Row>
   );
 };

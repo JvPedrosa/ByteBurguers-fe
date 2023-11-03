@@ -1,0 +1,23 @@
+export default {
+  colors: {
+    white: "#FFFFFF",
+    snow: "#F9FAFB",
+    silverCloud: "#D9D9D9",
+    silverChalice: "#ACACAC",
+    quickSilver: "#A1A1A1",
+    boulder: "#757575",
+    tuatara: "#3B3B3B",
+    mineShaft: "#222222",
+    black: "#000000",
+    skyBlue: "#87CEEB",
+    dodgerBlue: "#1E90FF",
+    navyBlue: "#000080",
+    deepChestnut: "#5D4037",
+    camelot: "#8B475D",
+    emperor: "#514E4E",
+    ebonyClay: "#232B2B",
+    saffronMango: "#F4C430",
+    flamePea: "#DD7E6B",
+    apple: "#4CA64C",
+  },
+};
