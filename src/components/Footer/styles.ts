@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.footer`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.gray700};
+  background-color: ${({ theme }) => theme.colors.mineShaft};
   display: flex;
   align-items: center;
   justify-content: space-between;

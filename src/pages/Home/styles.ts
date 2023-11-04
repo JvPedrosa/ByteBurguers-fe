@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const Row = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-left: -15px;
-  margin-right: -15px;
   gap: 30px;
 `;

@@ -1,19 +1,17 @@
-import { ShoppingCart } from "./ShoppingCart";
 import * as S from "./styles";
+import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-interface HeaderProps {
-  viewCart: boolean;
-}
-
-export const Header = ({ viewCart }: HeaderProps) => {
+export const Header = () => {
   return (
     <S.Container>
-      <S.LinksContainer>
-        <S.Link to="/">Home</S.Link>
-        <S.Link to="/login">Login</S.Link>
-      </S.LinksContainer>
+      <S.Link to="/">
+        <HomeIcon />
+      </S.Link>
       <S.Title>Byte Burgers</S.Title>
-      {viewCart && <ShoppingCart />}
+      <S.Link to="/login">
+        <AccountCircleIcon />
+      </S.Link>
     </S.Container>
   );
 };

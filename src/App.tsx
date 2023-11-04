@@ -21,9 +21,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <ProductsProvider>
         <Router>
-          <Header viewCart={viewCart} />
+          <Header />
           <div className="content">
-            <Routes />
+            <Routes viewCart={viewCart} />
           </div>
           <Footer />
         </Router>

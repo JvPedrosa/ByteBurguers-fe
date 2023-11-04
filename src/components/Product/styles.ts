@@ -15,8 +15,7 @@ export const Column = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  color: ${({ theme }) => theme.colors.white};
-  background-color: ${({ theme }) => theme.colors.ebonyClay};
+  background-color: ${({ theme }) => theme.colors.snow};
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s;
@@ -32,8 +31,8 @@ export const ProductImage = styled.img`
 
 export const ProductName = styled.h2`
   font-size: 1.2rem;
-  color: ${({ theme }) => theme.colors.snow};
-  text-shadow: 2px 2px 2px ${({ theme }) => theme.colors.mineShaft};
+  color: ${({ theme }) => theme.colors.black};
+  text-shadow: 2px 2px 2px ${({ theme }) => theme.colors.white};
   line-height: 1.2em;
   max-height: 3.6em;
   overflow: hidden;
@@ -53,8 +52,10 @@ export const Footer = styled.div`
 `;
 
 export const ProductPrice = styled.div`
-  font-size: 1rem;
-  color: ${({ theme }) => theme.colors.flamePea};
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.mineShaft};
+  text-shadow: 2px 2px 2px ${({ theme }) => theme.colors.white};
 `;
 
 export const Quantity = styled.div`
