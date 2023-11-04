@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type ButtonProps = {
+  action: "add" | "remove";
+};
+
 export const Column = styled.div`
   min-width: 180px;
   padding: 15px;
@@ -17,6 +21,7 @@ export const Column = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s;
   gap: 15px;
+  height: 300px;
 `;
 
 export const ProductImage = styled.img`
@@ -29,6 +34,13 @@ export const ProductName = styled.h2`
   font-size: 1.2rem;
   color: ${({ theme }) => theme.colors.snow};
   text-shadow: 2px 2px 2px ${({ theme }) => theme.colors.mineShaft};
+  line-height: 1.2em;
+  max-height: 3.6em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 `;
 
 export const Footer = styled.div`
@@ -51,32 +63,20 @@ export const Quantity = styled.div`
   justify-content: center;
 `;
 
-export const Button = styled.button`
-  background-color: ${({ theme }) => theme.colors.dodgerBlue};
+export const Button = styled.button<ButtonProps>`
+  background-color: ${({ theme, action }) =>
+    action === "add" ? theme.colors.apple : theme.colors.firebrick};
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
-  width: 25px;
-  height: 25px;
+  padding: 10px 15px;
+  font-weight: bold;
+  transition: margin-bottom 0.2s, box-shadow 0.2s;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.navyBlue};
-  }
-`;
-
-export const AddButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.dodgerBlue};
-  color: ${({ theme }) => theme.colors.white};
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  width: 100%;
-  height: 40px;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.navyBlue};
+    margin-bottom: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   }
 `;
