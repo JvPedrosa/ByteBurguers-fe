@@ -9,7 +9,7 @@ export const Header = () => {
         <HomeIcon />
       </S.Link>
       <S.Title>Byte Burgers</S.Title>
-      <S.Link to="/login">
+      <S.Link to="/signin">
         <AccountCircleIcon />
       </S.Link>
     </S.Container>

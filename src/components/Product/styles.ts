@@ -15,7 +15,7 @@ export const Column = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  background-color: ${({ theme }) => theme.colors.snow};
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   transition: transform 0.2s;

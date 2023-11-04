@@ -2,7 +2,7 @@ import useCart from "../../hooks/useCart";
 import useProducts from "../../hooks/useProducts";
 import * as S from "./styles";
 import MemoizedProduct from "../../components/Product";
-import { ShoppingCart } from "../../components/ShoppingCart";
+import { CartIcon } from "../../components/CartIcon";
 
 interface ShoppingCartProps {
   viewCart: boolean;
@@ -28,7 +28,7 @@ export const Home = ({ viewCart }: ShoppingCartProps) => {
           );
         })}
       </S.Row>
-      {viewCart && <ShoppingCart />}
+      {viewCart && <CartIcon />}
     </>
   );
 };

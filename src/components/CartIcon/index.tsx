@@ -1,7 +1,7 @@
 import useCart from "../../hooks/useCart";
 import * as S from "./styles";
 
-export const ShoppingCart = () => {
+export const CartIcon = () => {
   const { totalItems } = useCart();
   return (
     <S.ShoppingCart>

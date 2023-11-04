@@ -35,13 +35,9 @@ export const Link = styled(NavLink)`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.deepChestnut};
+  color: ${({ theme }) => theme.colors.snow};
   font-size: 1rem;
   margin: 0 2rem;
-
-  &.active {
-    color: ${({ theme }) => theme.colors.white};
-  }
 
   &:hover {
     color: #52575a;
