@@ -8,7 +8,7 @@ export const Header = () => {
       <S.Link to="/">
         <HomeIcon />
       </S.Link>
-      <S.Title>Byte Burgers</S.Title>
+      <S.Title to="/">Byte Burguers</S.Title>
       <S.Link to="/signin">
         <AccountCircleIcon />
       </S.Link>

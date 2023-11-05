@@ -2,9 +2,16 @@ import { useMemo, useReducer, createContext, ReactElement } from "react";
 
 export type CartItemType = {
   id: number;
-  name: string;
+  title: string;
   price: number;
-  qty: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+  quantity: number;
 };
 
 type CartStateType = { cart: CartItemType[] };
@@ -35,7 +42,16 @@ const reducer = (
         throw new Error("action.payload missing in ADD action");
       }
 
-      const { id, name, price } = action.payload;
+      const {
+        id,
+        title,
+        price,
+        description,
+        category,
+        image,
+        rating,
+        quantity,
+      } = action.payload;
 
       const filteredCart: CartItemType[] = state.cart.filter(
         (item) => item.id !== id
@@ -45,9 +61,26 @@ const reducer = (
         (item) => item.id === id
       );
 
-      const qty: number = itemExists ? itemExists.qty + 1 : 1;
+      const qty: number = itemExists
+        ? itemExists.quantity + quantity
+        : quantity;
 
-      return { ...state, cart: [...filteredCart, { id, name, price, qty }] };
+      return {
+        ...state,
+        cart: [
+          ...filteredCart,
+          {
+            id,
+            title,
+            price,
+            description,
+            category,
+            image,
+            rating,
+            quantity: qty,
+          },
+        ],
+      };
     }
     case REDUCER_ACTION_TYPE.REMOVE: {
       if (!action.payload) {
@@ -67,7 +100,7 @@ const reducer = (
         throw new Error("action.payload missing in QUANTITY action");
       }
 
-      const { id, qty } = action.payload;
+      const { id, quantity } = action.payload;
 
       const itemExists: CartItemType | undefined = state.cart.find(
         (item) => item.id === id
@@ -77,7 +110,7 @@ const reducer = (
         throw new Error("Item must exist in order to update quantity");
       }
 
-      const updatedItem: CartItemType = { ...itemExists, qty };
+      const updatedItem: CartItemType = { ...itemExists, quantity };
 
       const filteredCart: CartItemType[] = state.cart.filter(
         (item) => item.id !== id
@@ -101,7 +134,7 @@ const useCartContext = (initCartState: CartStateType) => {
   }, []);
 
   const totalItems = state.cart.reduce((previousValue, cartItem) => {
-    return previousValue + cartItem.qty;
+    return previousValue + cartItem.quantity;
   }, 0);
 
   const totalPrice = new Intl.NumberFormat("en-US", {
@@ -109,7 +142,7 @@ const useCartContext = (initCartState: CartStateType) => {
     currency: "USD",
   }).format(
     state.cart.reduce((previousValue, cartItem) => {
-      return previousValue + cartItem.qty * cartItem.price;
+      return previousValue + cartItem.quantity * cartItem.price;
     }, 0)
   );
 

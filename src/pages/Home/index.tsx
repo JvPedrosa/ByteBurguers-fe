@@ -4,13 +4,10 @@ import * as S from "./styles";
 import MemoizedProduct from "../../components/Product";
 import { CartIcon } from "../../components/CartIcon";
 
-interface ShoppingCartProps {
-  viewCart: boolean;
-}
-
-export const Home = ({ viewCart }: ShoppingCartProps) => {
+export const Home = () => {
   const { products } = useProducts();
   const { dispatch, REDUCER_ACTIONS, cart } = useCart();
+  const { totalItems } = useCart();
 
   return (
     <>
@@ -28,7 +25,7 @@ export const Home = ({ viewCart }: ShoppingCartProps) => {
           );
         })}
       </S.Row>
-      {viewCart && <CartIcon />}
+      {totalItems > 0 && <CartIcon />}
     </>
   );
 };

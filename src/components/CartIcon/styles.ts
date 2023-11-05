@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { NavLink } from "react-router-dom";
 
-export const ShoppingCart = styled.div`
+export const ShoppingCart = styled(NavLink)`
   display: flex;
   align-items: center;
   justify-content: center;

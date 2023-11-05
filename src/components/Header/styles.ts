@@ -13,7 +13,8 @@ export const Container = styled.header`
   background-color: #1f1f1f;
 `;
 
-export const Title = styled.h1`
+export const Title = styled(NavLink)`
+  text-decoration: none;
   font-size: 1.5em;
   font-weight: bold;
   text-align: center;

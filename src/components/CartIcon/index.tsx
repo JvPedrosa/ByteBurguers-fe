@@ -4,7 +4,7 @@ import * as S from "./styles";
 export const CartIcon = () => {
   const { totalItems } = useCart();
   return (
-    <S.ShoppingCart>
+    <S.ShoppingCart to="/shopping-cart">
       <S.StyledShoppingCartIcon />
       <S.ShoppingCartCount>{totalItems}</S.ShoppingCartCount>
     </S.ShoppingCart>

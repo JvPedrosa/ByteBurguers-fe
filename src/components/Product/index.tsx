@@ -22,9 +22,13 @@ const Product = ({
       type: REDUCER_ACTIONS.ADD,
       payload: {
         id: product.id,
-        name: product.title,
+        title: product.title,
         price: product.price,
-        qty: 1,
+        category: product.category,
+        description: product.description,
+        image: product.image,
+        rating: product.rating,
+        quantity: 1,
       },
     });
   };
@@ -43,9 +47,13 @@ const Product = ({
                 type: REDUCER_ACTIONS.REMOVE,
                 payload: {
                   id: product.id,
-                  name: product.title,
+                  title: product.title,
                   price: product.price,
-                  qty: 1,
+                  category: product.category,
+                  description: product.description,
+                  image: product.image,
+                  rating: product.rating,
+                  quantity: 1,
                 },
               })
             }

@@ -5,4 +5,5 @@ export const Row = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
+  margin: 0 40px;
 `;
