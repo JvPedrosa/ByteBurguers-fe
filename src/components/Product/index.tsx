@@ -58,11 +58,11 @@ const Product = ({
               })
             }
           >
-            Remove
+            Remover
           </S.Button>
         ) : (
           <S.Button onClick={onAddToCart} action="add">
-            Add to cart
+            Comprar
           </S.Button>
         )}
       </S.Footer>

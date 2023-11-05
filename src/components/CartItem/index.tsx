@@ -24,10 +24,17 @@ export const CartItem = ({ cartItem }: CartItemProps): React.ReactElement => {
   const itemTotal = cartItem.price * cartItem.quantity;
 
   const handleDecreaseQuantity = () => {
-    dispatch({
-      type: REDUCER_ACTIONS.QUANTITY,
-      payload: { ...cartItem, quantity: cartItem.quantity - 1 },
-    });
+    if (cartItem.quantity === 1) {
+      dispatch({
+        type: REDUCER_ACTIONS.REMOVE,
+        payload: { id: cartItem.id }, // Pass an object with only the id
+      });
+    } else {
+      dispatch({
+        type: REDUCER_ACTIONS.QUANTITY,
+        payload: { ...cartItem, quantity: cartItem.quantity - 1 },
+      });
+    }
   };
 
   const handleIncreaseQuantity = () => {

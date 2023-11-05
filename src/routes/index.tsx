@@ -2,8 +2,8 @@ import { Routes as AppRoutes, Route } from "react-router-dom";
 import { Home } from "../pages/Home";
 import Signin from "../pages/Signin";
 import { ShoppingCart } from "../pages/ShoppingCart";
-
-// const PATH = import.meta.env.VITE_PATH;
+import { Signup } from "../pages/Signup";
+import { Account } from "../pages/Account";
 
 export default function Routes() {
   return (
@@ -12,7 +12,9 @@ export default function Routes() {
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Home />} />
       <Route path="/signin" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/shopping-cart" element={<ShoppingCart />} />
+      <Route path="/account" element={<Account />} />
     </AppRoutes>
   );
 }

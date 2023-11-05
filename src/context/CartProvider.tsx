@@ -29,7 +29,7 @@ export type ReducerActionType = typeof REDUCER_ACTION_TYPE;
 
 export type ReducerAction = {
   type: string;
-  payload?: CartItemType;
+  payload?: CartItemType | { id: number };
 };
 
 const reducer = (
@@ -51,7 +51,7 @@ const reducer = (
         image,
         rating,
         quantity,
-      } = action.payload;
+      } = action.payload as CartItemType;
 
       const filteredCart: CartItemType[] = state.cart.filter(
         (item) => item.id !== id
@@ -82,42 +82,57 @@ const reducer = (
         ],
       };
     }
+
     case REDUCER_ACTION_TYPE.REMOVE: {
-      if (!action.payload) {
-        throw new Error("action.payload missing in REMOVE action");
+      if (!action.payload || typeof action.payload === "number") {
+        throw new Error(
+          "action.payload missing or incorrect type in REMOVE action"
+        );
       }
 
-      const { id } = action.payload;
+      const { id } =
+        typeof action.payload === "object" && "id" in action.payload
+          ? action.payload
+          : { id: undefined };
 
-      const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.id !== id
-      );
+      if (id === undefined) {
+        throw new Error("Item ID is missing in REMOVE action payload");
+      }
 
-      return { ...state, cart: [...filteredCart] };
+      return {
+        ...state,
+        cart: state.cart.filter((item) => item.id !== id),
+      };
     }
+
     case REDUCER_ACTION_TYPE.QUANTITY: {
-      if (!action.payload) {
-        throw new Error("action.payload missing in QUANTITY action");
+      if (!action.payload || typeof action.payload === "number") {
+        throw new Error(
+          "action.payload is missing or incorrect type in QUANTITY action"
+        );
       }
 
-      const { id, quantity } = action.payload;
+      if ("quantity" in action.payload) {
+        const { id, quantity } = action.payload as CartItemType;
 
-      const itemExists: CartItemType | undefined = state.cart.find(
-        (item) => item.id === id
-      );
-
-      if (!itemExists) {
-        throw new Error("Item must exist in order to update quantity");
+        if (quantity < 1) {
+          const filteredCart: CartItemType[] = state.cart.filter(
+            (item) => item.id !== id
+          );
+          return { ...state, cart: filteredCart };
+        } else {
+          return {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === id ? { ...item, quantity } : item
+            ),
+          };
+        }
+      } else {
+        throw new Error("Expected CartItemType for QUANTITY action");
       }
-
-      const updatedItem: CartItemType = { ...itemExists, quantity };
-
-      const filteredCart: CartItemType[] = state.cart.filter(
-        (item) => item.id !== id
-      );
-
-      return { ...state, cart: [...filteredCart, updatedItem] };
     }
+
     case REDUCER_ACTION_TYPE.SUBMIT: {
       return { ...state, cart: [] };
     }

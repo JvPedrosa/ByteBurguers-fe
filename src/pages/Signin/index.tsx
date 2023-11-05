@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   StyledContainer,
@@ -9,6 +9,7 @@ import {
   StyledGrid,
   StyledButton,
   StyledCircularProgress,
+  StyledTypography2,
 } from "./styles";
 
 const Signin = () => {
@@ -21,12 +22,38 @@ const Signin = () => {
     password: "",
   });
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      navigation("/account");
+    }
+  }, [navigation]);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    validateEmail();
+    validatePassword();
+
+    if (errors.email || errors.password) {
+      return;
+    }
+
     setIsLoading(true);
 
+    try {
+      const user = { email, password };
+      localStorage.setItem("user", JSON.stringify(user));
+      navigation("/");
+    } catch (error) {
+      console.error("Failed to login and navigate: ", error);
+      setErrors((prevState) => ({
+        ...prevState,
+        password: "Login failed, check your credentials and try again.",
+      }));
+    }
+
     setIsLoading(false);
-    navigation("/app/dashboard");
   };
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,6 +138,14 @@ const Signin = () => {
               >
                 {isLoading ? <StyledCircularProgress size={24} /> : "Entrar"}
               </StyledButton>
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledTypography2 variant="body2">
+                Não tem uma conta?{" "}
+                <Link to="/signup" style={{ textDecoration: "none" }}>
+                  Cadastre-se
+                </Link>
+              </StyledTypography2>
             </StyledGrid>
           </StyledGrid>
         </form>

@@ -9,7 +9,12 @@ import {
   Grid,
 } from "@mui/material";
 
-export const StyledContainer = styled(Container)``;
+export const StyledContainer = styled(Container)`
+  width: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+`;
 
 export const StyledBox = styled(Box)`
   display: flex;
@@ -19,10 +24,17 @@ export const StyledBox = styled(Box)`
 `;
 
 export const StyledTypography = styled(Typography)({
-  marginBottom: "0.5rem !important",
+  marginBottom: "1rem !important",
   color: "#1f1f1f",
   fontWeight: "bold !important",
   fontSize: "2rem !important",
+});
+
+export const StyledTypography2 = styled(Typography)({
+  marginTop: "1rem !important",
+  color: "#1f1f1f",
+  fontWeight: "bold !important",
+  fontSize: "1rem !important",
 });
 
 export const StyledTextField = styled(TextField)({});
