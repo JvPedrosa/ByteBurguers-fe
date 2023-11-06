@@ -8,53 +8,36 @@ import {
   StyledGrid,
   StyledButton,
   StyledCircularProgress,
+  StyledCheckbox,
+  StyledTypography2,
+  StyledFormControlLabel,
 } from "./styles";
 
 export const Signup = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
+  const [watchOn, setWatchOn] = useState(false);
+  const [isFlamengo, setIsFlamengo] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  // ...
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setName(event.target.value);
-    if (errors.name) {
-      setErrors((prev) => ({ ...prev, name: "" }));
-    }
-  };
-
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlelast_nameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setLastName(event.target.value);
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setPhone(event.target.value);
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setCity(event.target.value);
+  const handleWatchOnChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setWatchOn(event.target.checked);
+  const handleIsFlamengoChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setIsFlamengo(event.target.checked);
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(event.target.value);
-    if (errors.email) {
-      setErrors((prev) => ({ ...prev, email: "" }));
-    }
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-    if (errors.password) {
-      setErrors((prev) => ({ ...prev, password: "" }));
-    }
-  };
-
-  const handleConfirmPasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(event.target.value);
-    if (errors.confirmPassword) {
-      setErrors((prev) => ({ ...prev, confirmPassword: "" }));
-    }
-  };
 
   const validateForm = () => {
     let valid = true;
@@ -74,16 +57,6 @@ export const Signup = () => {
       newErrors.email = "Email inválido";
       valid = false;
     }
-
-    if (password.length < 6) {
-      newErrors.password = "Senha deve ter pelo menos 6 caracteres";
-      valid = false;
-    } else if (password !== confirmPassword) {
-      newErrors.confirmPassword = "As senhas não coincidem";
-      valid = false;
-    }
-
-    setErrors(newErrors);
     return valid;
   };
 
@@ -91,15 +64,41 @@ export const Signup = () => {
     event.preventDefault();
     const isFormValid = validateForm();
     if (!isFormValid) {
+      // Handle validation errors...
       return;
     }
 
     setIsLoading(true);
 
+    const userData = {
+      name,
+      last_name: lastName,
+      phone,
+      city,
+      email,
+      watch_on: watchOn,
+      is_flamengo: isFlamengo,
+    };
+
     try {
+      const response = await fetch("http://127.0.0.1:8000/user/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+
       navigate("/home");
     } catch (error) {
-      console.error(error);
+      console.error("There was a problem with the fetch operation:", error);
     }
 
     setIsLoading(false);
@@ -123,31 +122,71 @@ export const Signup = () => {
             <StyledGrid item xs={12}>
               <StyledTextField
                 fullWidth
+                label="Sobrenome"
+                variant="outlined"
+                value={lastName}
+                onChange={handlelast_nameChange}
+              />
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledTextField
+                fullWidth
+                label="Telefone"
+                variant="outlined"
+                value={phone}
+                onChange={handlePhoneChange}
+              />
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledTextField
+                fullWidth
+                label="Cidade"
+                variant="outlined"
+                value={city}
+                onChange={handleCityChange}
+              />
+            </StyledGrid>
+            <StyledGrid item xs={12}>
+              <StyledTextField
+                fullWidth
                 label="Email"
                 variant="outlined"
                 value={email}
                 onChange={handleEmailChange}
               />
             </StyledGrid>
-            <StyledGrid item xs={12}>
-              <StyledTextField
-                fullWidth
-                label="Senha"
-                variant="outlined"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-              />
+            <StyledGrid item xs={12} container alignItems="center" spacing={1}>
+              <StyledGrid item>
+                <StyledFormControlLabel
+                  control={
+                    <StyledCheckbox
+                      checked={watchOn}
+                      onChange={handleWatchOnChange}
+                      name="watchOn"
+                    />
+                  }
+                  label={
+                    <StyledTypography2>Assiste One Piece?</StyledTypography2>
+                  }
+                />
+              </StyledGrid>
             </StyledGrid>
-            <StyledGrid item xs={12}>
-              <StyledTextField
-                fullWidth
-                label="Confirme a senha"
-                variant="outlined"
-                type="password"
-                value={confirmPassword}
-                onChange={handleConfirmPasswordChange}
-              />
+
+            <StyledGrid item xs={12} container alignItems="center" spacing={1}>
+              <StyledGrid item>
+                <StyledFormControlLabel
+                  control={
+                    <StyledCheckbox
+                      checked={isFlamengo}
+                      onChange={handleIsFlamengoChange}
+                      name="isFlamengo"
+                    />
+                  }
+                  label={
+                    <StyledTypography2>É torcedor Flamengo?</StyledTypography2>
+                  }
+                />
+              </StyledGrid>
             </StyledGrid>
             <StyledGrid item xs={12}>
               <StyledButton

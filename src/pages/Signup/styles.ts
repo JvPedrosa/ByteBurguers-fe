@@ -7,6 +7,8 @@ import {
   Button,
   CircularProgress,
   Grid,
+  Checkbox,
+  FormControlLabel,
 } from "@mui/material";
 
 export const StyledContainer = styled(Container)({
@@ -30,6 +32,12 @@ export const StyledTypography = styled(Typography)({
   fontSize: "2rem !important",
 });
 
+export const StyledTypography2 = styled(Typography)({
+  color: "#1f1f1f",
+  fontWeight: "bold !important",
+  fontSize: "1rem !important",
+});
+
 export const StyledTextField = styled(TextField)({});
 
 export const StyledButton = styled(Button)({});
@@ -41,3 +49,11 @@ export const StyledCircularProgress = styled(CircularProgress)({
 export const StyledGrid = styled(Grid)({
   marginBottom: "10px !important",
 });
+
+export const StyledCheckbox = styled(Checkbox)({
+  color: "primary",
+});
+
+export const StyledFormControlLabel = styled(FormControlLabel)`
+  color: #1f1f1f !important;
+`;
