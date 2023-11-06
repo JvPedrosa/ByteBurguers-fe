@@ -5,6 +5,7 @@ import {
   useEffect,
   useMemo,
 } from "react";
+import localData from "../data/items.json";
 
 export type ProductType = {
   id: number;
@@ -33,18 +34,7 @@ export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
   const [products, setProducts] = useState<ProductType[]>(initState);
 
   useEffect(() => {
-    const fetchProducts = async (): Promise<ProductType[]> => {
-      const data = await fetch("https://fakestoreapi.com/products")
-        .then((res) => {
-          return res.json();
-        })
-        .catch((err) => {
-          if (err instanceof Error) console.log(err.message);
-        });
-      return data;
-    };
-
-    fetchProducts().then((products) => setProducts(products));
+    setProducts(localData);
   }, []);
 
   const value = useMemo(() => ({ products }), [products]);

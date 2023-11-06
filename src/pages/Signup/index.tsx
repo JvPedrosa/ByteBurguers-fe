@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   StyledContainer,
   StyledBox,
@@ -96,7 +96,7 @@ export const Signup = () => {
       const data = await response.json();
       console.log(data);
 
-      navigate("/home");
+      navigate("/user-list");
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
@@ -107,6 +107,17 @@ export const Signup = () => {
   return (
     <StyledContainer>
       <StyledBox>
+        <StyledGrid item xs={12}>
+          <StyledButton
+            fullWidth
+            variant="contained"
+            color="secondary"
+            component={Link}
+            to="/user-list"
+          >
+            Ver Lista de Usuários
+          </StyledButton>
+        </StyledGrid>
         <StyledTypography>Crie sua conta</StyledTypography>
         <form onSubmit={handleSubmit}>
           <StyledGrid container spacing={1}>
